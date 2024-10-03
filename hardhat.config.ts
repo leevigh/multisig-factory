@@ -1,7 +1,11 @@
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, vars } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import * as dotenv from "dotenv";
 dotenv.config();
+
+const SECRET_KEY = vars.get("SECRET_KEY");
+const SECOND_SECRET_KEY = vars.get("SECOND_SECRET_KEY");
+const THIRD_SECRET_KEY = vars.get("THIRD_SECRET_KEY");
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
@@ -9,7 +13,7 @@ const config: HardhatUserConfig = {
     // for testnet
     "lisk-sepolia": {
       url: process.env.LISK_RPC_URL!,
-      accounts: [process.env.ACCOUNT_PRIVATE_KEY!],
+      accounts: [`${SECRET_KEY}`, `${SECOND_SECRET_KEY}`, `${THIRD_SECRET_KEY}`],
       gasPrice: 1000000000,
     },
   },
